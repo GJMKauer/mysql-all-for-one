@@ -18,15 +18,53 @@ Neste projeto, fui capaz de:
 
 # Funcionamento da aplicação
 
-Para iniciar o projeto, é necessário possuir o [Docker](https://docs.docker.com/engine/install/ubuntu/) instalado.
-
-Para rodar o projeto, é necessário executar o comando
-```
-docker-compose up -d
-```
-na raíz do projeto. Isso fará com que os containers docker sejam orquestrados e a aplicação esteja disponível. Esse comando deve ser executado via terminal dentro do diretório onde está o arquivo **docker-compose.yml**.
+Para iniciar o projeto, é necessário possuir o [Docker](https://docs.docker.com/engine/install/ubuntu/) e o [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) instalados no computador.
 
 O projeto trata-se de um desafio para consolidar o aprendizado com os comandos iniciais mais básicos do MySQL, fazendo a busca, atualização, inserção e remoção de dados no Banco de Dados Northwind.
+
+Após clonar o projeto em seu computador, para iniciá-lo é necessário executar o comando
+```
+docker-compose up -d && docker exec -it all_for_one bash
+```
+e na sequência
+```
+npm install
+```
+
+na pasta raíz do projeto. Isso fará com que os containers docker sejam orquestrados e a aplicação esteja disponível. Após isso, será necessário restaurar o banco de dados `Northwind` para rodar os comandos.
+
+<br>
+
+<details>
+  <summary><strong>🗒️ Instruções para restaurar o banco de dados `Northwind`</strong></summary><br />
+
+1. Faça o download do arquivo de backup [aqui](northwind.sql) clicando em "Raw", depois clicando com botão direito e selecionando "Salvar como" para salvar o arquivo em seu computador.
+2. Abra o arquivo com algum editor de texto e selecione todo o conteúdo do arquivo usando `CTRL-A`.
+3. Abra o MySQL Workbench.
+4. Crie uma conexão local no MySQL Workbench utilizando o hostname `localhost`, a porta `3306`, o usuário `root` e a senha `password`.
+5. Abra uma nova janela de query e cole dentro dela todo o conteúdo do arquivo `northwind.sql`.
+6. Selecione todo o código com o atalho `CTRL-A` e depois clique no ícone de raio para executar a query.
+
+    ![Restaurando o banco Northwind](images/restore_northwind.png)
+7. Aguarde alguns segundos (espere em torno de 30 segundos antes de tentar fazer algo).
+8. Clique no botão apontado na imagem a seguir para atualizar a listagem de banco de dados.
+
+    ![Tabelas do banco Northwind](images/refresh_databases.png)
+9. Verifique se o banco restaurado possui todas as seguintes tabelas:
+
+    ![Tabelas do banco Northwind](images/northwind.png)
+10. Clique com botão direito em cada tabela e selecione "Select Rows" e certifique-se que todas as tabelas possuem registros. Caso tenha alguma faltando, faça o passo a seguir. Caso contrário, pode ir para próxima seção.
+11. Caso existam tabelas faltando, drope o banco de dados clicando com o botão direito em cima do banco de dados northwind e selecionando "Drop Schema" e refaça os passos novamente, dessa vez aguardando um tempo maior quando executar o script de restauração.
+
+    ![Drop Schema](images/drop_database.png)
+
+</details>
+
+<br>
+
+Feita a restauração do banco, você pode executar as _queries_ descritas em cada arquivo `desafioN.sql` desse projeto.
+
+<br> 
 
 ---
 
